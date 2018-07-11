@@ -1,0 +1,240 @@
+@import url("../fonts.css");
+
+@import url("loaders.css");
+
+@dimgray: #6B6B6B;
+
+body {
+	font-family: arial;
+	margin: 0;
+}
+
+#main {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d6d6d6+0,bdbdbd+100 */
+	background: #d6d6d6; /* Old browsers */
+	background: -moz-linear-gradient(top, #d6d6d6 0%, #bdbdbd 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #d6d6d6 0%,#bdbdbd 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #d6d6d6 0%,#bdbdbd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d6d6', endColorstr='#bdbdbd',GradientType=0 ); /* IE6-9 */
+	padding: 10px;
+
+}
+
+h2 {
+	margin-top: 0;
+	font-size: 18px;
+	color: @dimgray;
+	text-shadow: 1px 1px 1px white, 1px 1px 1px @dimgray;
+	
+	.file-actions * {
+		color: gray;
+	}
+}
+
+#main-folder {
+	display: inline-block;
+	width: 75%;
+}
+
+#file-viewer {
+	display: inline-block;
+	width: 23%;
+	text-align: center;
+	padding: 10px;
+	box-sizing: border-box;
+	min-height: 100px;
+	border : 1px dashed @dimgray;
+
+	img {
+		max-width: 100%;
+		display: block;
+		margin: 0 auto;
+	}
+}
+
+.file-folder {
+}
+
+.file-folder > ul {
+	overflow-y: hidden;
+	height: 0;
+	transition: 0.2s linear;
+}
+
+.file-folder.displayed {
+	& > ul {
+		height: auto;
+	}
+}
+
+.file {
+}
+
+.file-icon {
+	cursor: pointer;
+	color : @dimgray;
+}
+
+.file-file {
+	.file-row {
+		height: 28px;
+	}
+}
+
+.file-row {
+	padding: 0 5px;
+	border-radius: 2px;
+
+	&.selected {
+		background: @dimgray;
+		*:not(input) {
+			color: white !important;
+		}
+	}
+}
+
+.folder-name, .file-name {
+	color: @dimgray;
+}
+
+.file {
+	a {
+		text-decoration: none;
+
+	}
+}
+#file-browser {
+	padding-left: 35px;
+	background-color: #eee;
+	padding : 10px;
+	border-radius: 5px 5px 0 0;
+	font-size: 0;
+	& * {
+		font-size: 15px;
+		vertical-align: top;
+	}
+	
+	button {
+		font-size: 12px;
+	}
+	input {
+		line-height: 14px;
+	}
+	.folder-contents {
+		margin : 0;
+		padding: 0;
+		list-style: none;
+		color : @dimgray;
+		.file-actions {
+
+		}
+		li {
+			line-height: 25px;
+			.file-row * {
+				img {
+					vertical-align: middle;
+				}
+
+				i {
+					vertical-align: baseline;
+				}
+
+				vertical-align: middle;
+			}
+		}
+		& > li > .folder-contents {
+			padding : 0 0 0 25px;
+		}
+
+	}
+}
+
+#main-folder {
+	margin-right: 2%;
+}
+
+.file-actions {
+	display: inline-block;
+	margin-left: 30px;
+	& > a {
+		color: lightgray;
+		&:hover {
+			color: @dimgray;
+		}
+	}
+}
+
+.file-row {
+	.loader {
+		display: inline-block;
+
+	}
+}
+
+#forms {
+	display: none;
+/*	font-size:0;
+	border-top: 1px solid lightgray;
+	background-color: #eee;
+	border-radius: 0px 0px 5px 5px;
+	padding: 5px;
+	fieldset {
+
+		legend {
+			display: block;
+		}
+		&:first-child {
+			width: 42%;
+		}
+		&:last-child {
+			width: 53%;
+		}
+		border: none;
+		margin-right:2%; 
+		box-sizing: border-box;
+		vertical-align: top;
+		display: inline-block;
+		width: 48%;
+		&:last-child {
+			margin-right: 0;
+		}
+		height: 30px;
+		& > form > * {
+			vertical-align: middle;
+		}
+	}*/
+}
+
+button {
+	border: none;
+	background-color: @dimgray;
+	color: white;
+	padding: 4px;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+#selection {
+	background-color: #eee;
+	padding: 10px;
+	border-radius: 0 0 5px 5px;
+	border-top: 1px solid lightgray;
+	text-align: right;
+}
+
+#file-viewer .fa{
+	font-size: 5em ;
+}
+
+#file-viewer p {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space : nowrap;
+	font-size: 0.7em;
+	margin: 10px 0 0;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

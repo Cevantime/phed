@@ -1,0 +1,28 @@
+{
+    "dependencies": {
+        "modules": [
+            {
+                "name": "layout",
+                "version": "1.0.0"
+            }
+        ]
+    },
+    "map": {
+        "dbchanges": [
+            "0_init.sql"
+        ],
+        "assets_src": {
+            "js": {
+                "src": {
+                    "modules": {
+                        "flashmessages": [
+                            "popup-flashmessages.js",
+                            "slidedown-flashmessages.js"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "version": "1.0.0"
+}

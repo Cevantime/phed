@@ -1,0 +1,1 @@
+global.jQuery = window.jQuery || require('jquery');

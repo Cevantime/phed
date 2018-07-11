@@ -1,0 +1,68 @@
+{
+    "version": "1.0.0",
+    "dependencies": {
+        "module": [
+            {
+                "name": "layout",
+                "version": "1.0.0"
+            },
+            {
+                "name": "flashmessages",
+                "version": "1.0.0"
+            },
+            {
+                "name": "memberspace",
+                "version": "1.0.0"
+            },
+            {
+                "name": "bootstrap",
+                "version": "1.0.0"
+            },
+            {
+                "name": "font-awesome",
+                "version": "1.0.0"
+            }
+        ]
+    },
+    "map": {
+        "dbchanges": [
+            "0_init.sql"
+        ],
+        "core": [
+            "BO_Controller.php"
+        ],
+        "assets": {
+            "vendor": {
+                "css": {
+                    "bo": [
+                        "elements.css",
+                        "isotope.css",
+                        "premium.css",
+                        "theme.css"
+                    ]
+                },
+                "js": {
+                    "bo": [
+                        "theme.js"
+                    ]
+                }
+            }
+        },
+        "assets_src": {
+            "js": {
+                "src": {
+                    "modules": {
+                        "bo": [
+                            "fileselect.js",
+                            "jquery.js",
+                            "parseModal.js",
+                            "parseTooltips.js",
+                            "removeClassRegEx.js",
+                            "switchNav.js"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

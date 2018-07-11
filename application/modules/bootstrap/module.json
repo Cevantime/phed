@@ -1,0 +1,36 @@
+{
+    "dependencies": {
+        "node": [
+            {
+                "name": "bootstrap",
+                "version": "3.3.7"
+            }
+        ]
+    },
+    "map": {
+        "assets": {
+            "vendor": {
+                "css": {
+                    "bootstrap": [
+                        "bootstrap-theme.css",
+                        "bootstrap-theme.css.map",
+                        "bootstrap-theme.min.css",
+                        "bootstrap-theme.min.css.map",
+                        "bootstrap.css",
+                        "bootstrap.css.map",
+                        "bootstrap.min.css",
+                        "bootstrap.min.css.map"
+                    ],
+                    "fonts": [
+                        "glyphicons-halflings-regular.eot",
+                        "glyphicons-halflings-regular.eot?",
+                        "glyphicons-halflings-regular.svg",
+                        "glyphicons-halflings-regular.ttf",
+                        "glyphicons-halflings-regular.woff"
+                    ]
+                }
+            }
+        }
+    },
+    "version": "1.0.0"
+}

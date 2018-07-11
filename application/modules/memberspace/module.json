@@ -1,0 +1,14 @@
+{
+    "dependencies": [],
+    "map": {
+        "dbchanges": [
+            "0_init.sql",
+            "1_add_posts.sql",
+            "2_add_confirmed_to_users.sql",
+            "3_remove_group_id_from_link_users_rights.sql",
+            "4_change_password_length_for_users.sql",
+            "5_change_index_size_for_right_name_type.sql"
+        ]
+    },
+    "version": "1.0.0"
+}

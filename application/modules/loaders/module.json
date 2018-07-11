@@ -1,0 +1,13 @@
+{
+    "dependencies": [],
+    "map": {
+        "assets_src": {
+            "css": {
+                "modules": [
+                    "loaders.less"
+                ]
+            }
+        }
+    },
+    "version": "1.0.0"
+}

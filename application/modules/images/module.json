@@ -1,0 +1,12 @@
+{
+    "dependencies": {
+        "composer": [
+            {
+                "name": "ext-imagick",
+                "version": "*"
+            }
+        ]
+    },
+    "map": [],
+    "version": "1.0.0"
+}
