@@ -17,7 +17,8 @@ if (!defined('BASEPATH'))
   | path to your installation.
   |
  */
-$config['base_url'] = ENVIRONMENT === 'development' ? 'http://127.0.0.1/phed': '???';
+//$config['base_url'] = ENVIRONMENT === 'development' ? 'http://localhost/phed': '???';
+$config['base_url'] = ENVIRONMENT === 'development' ? 'http://localhost/phed': '???';
 
 /*
   |--------------------------------------------------------------------------

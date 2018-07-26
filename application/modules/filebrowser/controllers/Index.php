@@ -16,35 +16,27 @@ class Index extends FILEBROWSER_Controller
         parent::__construct();
         $this->layout->setLayout('filebrowser/layout/filebrowser');
         $this->filters = $this->input->get('filters') ? explode(',', $this->input->get('filters')) : ['all'];
-        
+
         $this->model = $this->input->get('model') ?: 'filebrowser/file';
         $this->modelName = pathinfo($this->model)['filename'];
         $this->load->model($this->model);
 //		$this->output->enable_profiler(true);
     }
 
-    public function home($parent_id = null)
+    public function home()
     {
         $this->load->helper('memberspace/connection');
+        $folder = $this->input->get_post('folder');
         if (user_can('see', 'file', '*')) {
-            $userId = user_id();
-            $files = $this->{$this->modelName}->getGrouped(array('user_id' => $userId, 'parent_id' => $parent_id), $this->filters);
-            $this->layout->view('filebrowser/home', array('files' => $files));
+            $this->layout->view('filebrowser/index', array('folder' => $folder));
         } else {
             die(translate('vous ne pouvez pas accéder à cette ressource.'));
         }
     }
 
-    public function index($parent_id = null)
+    public function index()
     {
-        $this->load->helper('memberspace/connection');
-        if (user_can('see', 'file', '*')) {
-            $userId = user_id();
-            $files = $this->{$this->modelName}->getGrouped(array('user_id' => $userId, 'parent_id' => $parent_id), $this->filters);
-            $this->layout->view('filebrowser/index', array('files' => $files));
-        } else {
-            die(translate('vous ne pouvez pas accéder à cette ressource.'));
-        }
+        $this->home();
     }
 
     public function see($idFile = null)
@@ -52,7 +44,13 @@ class Index extends FILEBROWSER_Controller
         if (user_can('see', 'file', $idFile)) {
             $file = null;
             if ($idFile) {
-                $file = $this->{$this->modelName}->getId($idFile);
+                if ($idFile !== null && !is_int($idFile) && !ctype_digit($idFile)) {
+                    $userId = user_id();
+                    $file = $this->{$this->modelName}->getRow(['fullpath' => $idFile, 'user_id' => $userId]);
+
+                } else {
+                    $file = $this->{$this->modelName}->getId($idFile);
+                }
             }
 
             if (!$file || $file->is_folder) {
@@ -103,11 +101,14 @@ class Index extends FILEBROWSER_Controller
     private function seeFolder($folder = null)
     {
         $children = $this->{$this->modelName}->getGrouped(array('user_id' => user_id(), 'parent_id' => $folder ? $folder->id : null), $this->filters);
-        $this->load->view('filebrowser/see-folder', array('files' => $children, 'folder' => $folder ? $folder->name : 'root'));
+        $this->load->view('filebrowser/see-folder', array('files' => $children, 'folder' => $folder ));
     }
 
     public function seeFolderContent($folderId = null)
     {
+        if( ! $folderId) {
+            $folderId = null;
+        }
         if (!user_can('see', 'file', $folderId)) {
             die(translate('Vous ne pouvez pas accéder à cette ressource'));
         }

@@ -44,6 +44,7 @@ $route['default_controller'] = "home";
 $route['404_override'] = '';
 
 $route['filebrowser/index(.*)'] = 'FileBrowser$1';
+$route['filebrowser/disconnect'] = 'FileBrowser/disconnect';
 $route['bo/users(.*)'] = 'AdminUser$1';
 
 /* End of file routes.php */

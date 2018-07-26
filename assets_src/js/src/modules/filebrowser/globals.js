@@ -19,21 +19,21 @@ function seeFile(fileId) {
 
 function fetchFolder(folderId, callback) {
   var $folderEl = $('#folder-' + folderId);
+  console.log('fetch folder');
   if (!$folderEl.hasClass('folder-fetched')) {
 
     addWait(folderId);
-
     $.get(url('filebrowser/index/seeFolderContent/' + folderId), function (html) {
       $folderEl.append(html);
       $folderEl.addClass('folder-fetched');
       removeWait(folderId);
-      if (callback !== undefined) {
+      if (typeof callback !== 'undefined') {
         callback();
       }
       parseNewFiles();
     });
   } else {
-    if (callback !== undefined) {
+    if (typeof callback !== 'undefined') {
       callback();
     }
   }
@@ -121,7 +121,7 @@ function renameFile(fileId) {
   if ($fileParent.hasClass('file')) {
     $formToAppend.find('input[name="parent_id"]').val($fileParent.data('file'));
   } else {
-    $formToAppend.find('input[name="parent_id"]').val(0);
+    $formToAppend.find('input[name="parent_id"]').val(window.BASE_FOLDER_ID);
   }
   $formToAppend.append(
     $('<input>').attr('type', 'hidden').attr('name', 'id').attr('value', fileId)
@@ -271,7 +271,7 @@ function moveFile(fileId, targetId) {
     method: 'post',
     success: function (data) {
       if (data.status === 'success') {
-        if (targetId === 0) {
+        if (targetId === window.BASE_FOLDER_ID) {
 //					$.get(url('filebrowser/index/seeFolderContent'), function (html) {
 //						$('#main-folder').html(html);
 //						parseNewFiles();
@@ -361,7 +361,7 @@ function submitFolder($formFolder, e) {
   $formFolder.append('<div class="loader"></div>');
   $.post(url('filebrowser/index/add'), datas, function (rep) {
     if (rep.status === 'success') {
-      $.get(url('filebrowser/index/seeFolderContent'), function (html) {
+      $.get(url('filebrowser/index/seeFolderContent/' + window.BASE_FOLDER_ID), function (html) {
         $('#main-folder').html(html);
         parseNewFiles();
         $formFolder.remove();
@@ -385,7 +385,7 @@ function submitFile($formFile, e) {
     data: datas,
     success: function (rep) {
       if (rep.status === 'success') {
-        $.get(url('filebrowser/index/seeFolderContent'), function (html) {
+        $.get(url('filebrowser/index/seeFolderContent/' + window.BASE_FOLDER_ID), function (html) {
           $('#main-folder').html(html);
           parseNewFiles();
           $formFile.remove();
@@ -416,14 +416,14 @@ function initForms() {
       submitFile($clone, e);
     }).prependTo('#file-browser');
   });
-  if(window.opener) {
+  if (window.opener) {
     $("#select-bt").click(function () {
       var $fileSelected = $('.file-row.selected').parent();
       if ($fileSelected.hasClass('file-file')) {
         onSelect($fileSelected);
       }
     });
-    
+
   } else {
     $("#select-bt").hide();
   }
@@ -435,13 +435,16 @@ function onSelect($elm) {
   var infos = $elm.data('infos');
   var obj = {
     id: id,
-    src: baseURL+src,
+    src: window.baseURL + src,
     type: type,
     infos: infos
   };
 
   window.close();
-  window.opener.filebrowser_callback(obj);
+
+  if (window.opener && !window.opener.closed) {
+    window.opener.filebrowser_callback(obj);
+  }
 }
 
 $(function () {
@@ -450,7 +453,7 @@ $(function () {
   $('#main').droppable({
     drop: function (event, ui) {
 
-      moveFile(ui.helper.parent().data('file'), 0);
+      moveFile(ui.helper.parent().data('file'), window.BASE_FOLDER_ID);
 
     },
     greedy: true

@@ -1,4 +1,4 @@
-<?php echo Modules::run('filebrowser/see'); ?>
+<?php echo Modules::run('filebrowser/see', $folder); ?>
 
 <?php echo Modules::run('filebrowser/add'); ?>
 

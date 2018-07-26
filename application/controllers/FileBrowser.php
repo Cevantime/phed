@@ -25,17 +25,16 @@ class FileBrowser extends Index
         }
 
         parent::__construct();
-        
+
 //        if (isset($_SERVER['HTTP_ORIGIN'])) {
 //            $origin = $_SERVER['HTTP_ORIGIN'];
 //            $userDomain = $this->user->domain;
 //            if(str_replace(array('http://', 'https://'), '', $userDomain) === str_replace(array('http://', 'https://'), '', $origin)){
-                header("Access-Control-Allow-Origin: *");
-                header('Access-Control-Allow-Credentials: true');
-                header('Access-Control-Max-Age: 86400');    // cache for 1 day
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Credentials: true');
+        header('Access-Control-Max-Age: 86400');    // cache for 1 day
 //            }
 //        }
-
         // Access-Control headers are received during OPTIONS requests
         if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
@@ -48,7 +47,7 @@ class FileBrowser extends Index
 
             exit(0);
         }
-
+        $this->layout->title('PHED');
         $this->output->enable_profiler(false);
     }
 
@@ -159,6 +158,12 @@ class FileBrowser extends Index
         } else {
             die(translate('Vous ne pouvez pas effectuer cette action'));
         }
+    }
+
+    public function disconnect()
+    {
+        $this->load->library('memberspace/loginManager');
+        $this->loginmanager->disconnect();
     }
 
 }

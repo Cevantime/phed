@@ -9,7 +9,7 @@
 		</script>
 		<link rel="stylesheet" href="<?php echo base_url('assets/local/css/stylesheet.css'); ?>"></link>
 		
-        <title>Core 2</title>
+        <title>PHED</title>
     </head>
     <body>
 		<div id="fb-root"></div>

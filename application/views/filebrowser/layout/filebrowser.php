@@ -8,7 +8,6 @@
         </script>
 
         <link rel="stylesheet" href="<?php echo base_url('assets/vendor/css/font-awesome/css/font-awesome.min.css'); ?>"></link>
-        <link rel="stylesheet" href="<?php echo base_url('assets/vendor/css/jquery-ui/jquery-ui.min.css'); ?>"></link>
         <link rel="stylesheet" href="<?php echo base_url('assets/local/css/modules/filebrowser.css'); ?>"></link>
         <?php echo $css_for_layout ?>
         <?php echo $js_for_layout ?>
