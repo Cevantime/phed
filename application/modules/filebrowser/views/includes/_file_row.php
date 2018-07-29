@@ -4,6 +4,7 @@
 			<span class="file-icon"><i class="fa fa-folder"></i></span>
 			<label class="folder-name"><?php echo $file->name; ?></label> 
 			<div class="file-actions">
+				<a title="Aller dans le dossier" href="#" class="action" data-action="browse" data-file="<?php echo $file->fullpath; ?>"><i class="fa fa-eye"></i></a>
 				<?php if(user_can('delete', 'file', $file)) : ?>
 				<a title="Supprimer le dossier" href="#" class="action" data-action="delete" data-file="<?php echo $file->id; ?>"><i class="fa fa-trash"></i></a>
 				<?php endif; ?>

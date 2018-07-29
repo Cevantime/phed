@@ -1,5 +1,4 @@
 var $ = window.jQuery || require('jquery');
-
 global.jQuery = $;
 global.$ = $;
 
@@ -54,6 +53,9 @@ function doAction(name, fileId) {
       break;
     case 'rename' :
       renameFile(fileId);
+      break;
+    case 'browse' :
+      browse(fileId)
       break;
   }
   return false;
@@ -416,6 +418,14 @@ function initForms() {
       submitFile($clone, e);
     }).prependTo('#file-browser');
   });
+  $('h2 [data-action="browse-parent"]').click(function (e) {
+    e.preventDefault();
+    var parent = BASE_FOLDER_FULLPATH;
+    var folderArr = parent.split('/');
+    folderArr.pop();
+
+    browse(folderArr.join('/'));
+  });
   if (window.opener) {
     $("#select-bt").click(function () {
       var $fileSelected = $('.file-row.selected').parent();
@@ -428,6 +438,35 @@ function initForms() {
     $("#select-bt").hide();
   }
 }
+
+function browse(folder) {
+  var href = window.location.href;
+  var indexOfData;
+  if ((indexOfData = href.indexOf('?')) < 0) {
+    window.location = href + '?' + folder;
+  }
+
+  var dataStr = href.substring(href.indexOf('?') + 1, href.length);
+  var dataArr = dataStr.split('&');
+
+  var dataObj = {};
+
+  for (var datum of dataArr) {
+    var splitted = datum.split('=');
+    dataObj[splitted[0]] = splitted[1];
+  }
+
+  dataObj.folder = folder;
+
+  var newDataArr = [];
+
+  for (var key in dataObj) {
+    newDataArr.push(key + '=' + dataObj[key]);
+  }
+
+  window.location = href.substring(0, indexOfData) + '?' + newDataArr.join('&');
+}
+
 function onSelect($elm) {
   var id = $elm.data('file');
   var src = $elm.data('source');
