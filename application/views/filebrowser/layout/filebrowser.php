@@ -6,7 +6,7 @@
         <script type="text/javascript">
             var baseURL = "<?php echo base_url(); ?>";
         </script>
-
+        <META HTTP-EQUIV="Access-Control-Allow-Origin" CONTENT="*"/>
         <link rel="stylesheet" href="<?php echo base_url('assets/vendor/css/font-awesome/css/font-awesome.min.css'); ?>"></link>
         <link rel="stylesheet" href="<?php echo base_url('assets/local/css/modules/filebrowser.css'); ?>"></link>
         <?php echo $css_for_layout ?>

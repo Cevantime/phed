@@ -18,7 +18,6 @@ function seeFile(fileId) {
 
 function fetchFolder(folderId, callback) {
   var $folderEl = $('#folder-' + folderId);
-  console.log('fetch folder');
   if (!$folderEl.hasClass('folder-fetched')) {
 
     addWait(folderId);
@@ -85,7 +84,7 @@ function url(action) {
   if (window.opener === null) {
     return window.baseURL + action;
   }
-  return window.baseURL + action + "?model=" + window.opener.filebrowser_model + "&filters=" + window.opener.filebrowser_filters;
+  return window.baseURL + action + "?model=" + window.conf.filebrowser_model + "&filters=" + window.conf.filebrowser_filters;
 }
 
 function renameFile(fileId) {
@@ -426,6 +425,7 @@ function initForms() {
 
     browse(folderArr.join('/'));
   });
+  
   if (window.opener) {
     $("#select-bt").click(function () {
       var $fileSelected = $('.file-row.selected').parent();
@@ -467,26 +467,34 @@ function browse(folder) {
   window.location = href.substring(0, indexOfData) + '?' + newDataArr.join('&');
 }
 
+function FileMessage(id, src,type, infos) {
+  this.id = id;
+  this.src = src;
+  this.type = type;
+  this.infos = infos;
+}
+
 function onSelect($elm) {
   var id = $elm.data('file');
   var src = $elm.data('source');
   var type = $elm.data('type');
   var infos = $elm.data('infos');
-  var obj = {
-    id: id,
-    src: window.baseURL + src,
-    type: type,
-    infos: infos
-  };
-
+  
+  var message = new FileMessage(id, window.baseURL + src, type, infos);
+  console.log(window.opener);
+  if (window.opener && !window.opener.closed) {
+    console.log(message);
+    window.opener.postMessage(message, '*');
+  }
+  
   window.close();
 
-  if (window.opener && !window.opener.closed) {
-    window.opener.filebrowser_callback(obj);
-  }
 }
 
 $(function () {
+  window.addEventListener('message', function(e){
+    window.conf = e.data;
+  });
   parseNewFiles();
   initForms();
   $('#main').droppable({

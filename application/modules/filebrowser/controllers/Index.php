@@ -27,11 +27,8 @@ class Index extends FILEBROWSER_Controller
     {
         $this->load->helper('memberspace/connection');
         $folder = $this->input->get_post('folder');
-        if (user_can('see', 'file', '*')) {
-            $this->layout->view('filebrowser/index', array('folder' => $folder));
-        } else {
-            die(translate('vous ne pouvez pas accéder à cette ressource.'));
-        }
+        $this->layout->view('filebrowser/index', array('folder' => $folder));
+        
     }
 
     public function index()
