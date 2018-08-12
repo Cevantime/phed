@@ -106,7 +106,7 @@ class Index extends FILEBROWSER_Controller
         if( ! $folderId) {
             $folderId = null;
         }
-        if (!user_can('see', 'file', $folderId)) {
+        if ($folderId && !user_can('see', 'file', $folderId)) {
             die(translate('Vous ne pouvez pas accéder à cette ressource'));
         }
         $children = $this->{$this->modelName}->getGrouped(array('user_id' => user_id(), 'parent_id' => $folderId), $this->filters);
