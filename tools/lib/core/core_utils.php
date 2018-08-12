@@ -48,7 +48,7 @@ class Core_utils {
 		closedir($dir);
 	}
 
-	static function full_copy($src, $dst) {
+	static function full_copy($source, $dest) {
 		if (is_dir($source)) {
 			$dir_handle = opendir($source);
 			while ($file = readdir($dir_handle)) {
