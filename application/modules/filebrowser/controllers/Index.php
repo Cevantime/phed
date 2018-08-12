@@ -38,7 +38,7 @@ class Index extends FILEBROWSER_Controller
 
     public function see($idFile = null)
     {
-        if ($idFile && user_can('see', 'file', $idFile)) {
+        if (user_can('see', 'file', $idFile)) {
             $file = null;
             if ($idFile) {
                 if ($idFile !== null && !is_int($idFile) && !ctype_digit($idFile)) {
@@ -106,7 +106,7 @@ class Index extends FILEBROWSER_Controller
         if( ! $folderId) {
             $folderId = null;
         }
-        if ($folderId && !user_can('see', 'file', $folderId)) {
+        if (!user_can('see', 'file', $folderId)) {
             die(translate('Vous ne pouvez pas accéder à cette ressource'));
         }
         $children = $this->{$this->modelName}->getGrouped(array('user_id' => user_id(), 'parent_id' => $folderId), $this->filters);
