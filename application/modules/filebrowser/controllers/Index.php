@@ -38,7 +38,7 @@ class Index extends FILEBROWSER_Controller
 
     public function see($idFile = null)
     {
-        if (user_can('see', 'file', $idFile)) {
+        if ($idFile && user_can('see', 'file', $idFile)) {
             $file = null;
             if ($idFile) {
                 if ($idFile !== null && !is_int($idFile) && !ctype_digit($idFile)) {
