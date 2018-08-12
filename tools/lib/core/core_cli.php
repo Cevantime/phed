@@ -183,7 +183,6 @@ class Core_CLI {
 		//putenv('APPLICATION_ENV=default');
 		Core_utils::full_copy('./dbchanges/liquibase/update.dist.php', './dbchanges/liquibase/update.php');
 		Core_utils::sed('./dbchanges/liquibase/update.php', "#putenv\('APPLICATION_ENV=(.*?)'\)#", "putenv('APPLICATION_ENV=$app_env')");
-		$database = strtolower($database);
 		$database_hostname = Core_utils::scan('Database host (localhost/ip address) : ');
 		$root = Core_utils::scan('root username (probably root) : ');
 		$root_password = Core_utils::scan_silent('root password : ');

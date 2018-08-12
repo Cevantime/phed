@@ -58,14 +58,11 @@ class FileBrowser extends Index
             $folder = $this->{$this->modelName}->createFolderFromFullpath($post['parent_folder']);
             $_POST['parent_id'] = $folder->id;
         }
-
         if (!isset($post['user_id'])) {
             $_POST['user_id'] = user_id();
         }
-
         if (!$id && !$post)
             return array();
-
         if ($id) {
             if (!user_can('update', 'file', $id)) {
                 return array();

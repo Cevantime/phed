@@ -7,7 +7,7 @@ var gulpSequence = require('gulp-sequence')
 
 // If you are familiar with Rails, this task the equivalent of `rake assets:precompile`
 var revTask = function(cb) {
-  gulpSequence(
+  gulp.series(
     // 1) Add md5 hashes to assets referenced by CSS and JS files
     'rev-assets',
     // 2) Update asset references (images, fonts, etc) with reved filenames in compiled css + js

@@ -4,7 +4,7 @@ var express  = require('express')
 var gulp     = require('gulp')
 var gutil    = require('gulp-util')
 var logger   = require('morgan')
-var open     = require('open')
+var opn     = require('opn')
 var path     = require('path')
 
 var settings = {
@@ -27,7 +27,7 @@ var serverTask = function() {
     .listen(settings.port)
 
   gutil.log('production server started on ' + gutil.colors.green(url))
-  open(url)
+  opn(url)
 }
 
 gulp.task('server', serverTask)

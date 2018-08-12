@@ -1,11 +1,16 @@
 var gulp            = require('gulp')
 var gulpSequence    = require('gulp-sequence')
 var getEnabledTasks = require('../lib/getEnabledTasks')
-
-var defaultTask = function(cb) {
+require('./fonts')
+require('./images')
+require('./svgSprite')
+require('./javascript')
+require('./static')
+require('./watch')
+//var defaultTask = function(cb) {
   var tasks = getEnabledTasks('watch')
-  gulpSequence('clean', tasks.assetTasks, tasks.codeTasks, 'static', 'watch', cb)
-}
+//  gulp.series('clean', gulp.parallel(tasks.assetTasks), gulp.parallel(tasks.codeTasks), 'static', 'watch', cb)
+//}
 
-gulp.task('default', defaultTask)
-module.exports = defaultTask
+var task = gulp.task('default', gulp.series('clean', gulp.parallel(tasks.assetTasks), gulp.parallel(tasks.codeTasks), 'static', 'watch'))
+module.exports = task

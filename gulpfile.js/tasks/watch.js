@@ -22,5 +22,5 @@ var watchTask = function() {
   watch(path.join(config.root.src,'application/models/***/**/*'),browserSync.reload)
 }
 
-gulp.task('watch', ['browserSync'], watchTask)
+gulp.task('watch', gulp.series('browserSync'), watchTask)
 module.exports = watchTask

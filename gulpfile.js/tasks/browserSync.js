@@ -7,7 +7,7 @@ var webpackMultiConfig = require('../lib/webpack-multi-config')
 var config            = require('../config')
 var pathToUrl         = require('../lib/pathToUrl')
 
-var browserSyncTask = function() {
+var browserSyncTask = function(done) {
 
   var webpackConfig = webpackMultiConfig('development')
   var compiler = webpack(webpackConfig)
@@ -30,6 +30,7 @@ var browserSyncTask = function() {
   ]
 
   browserSync.init(config.tasks.browserSync)
+  done()
 }
 
 gulp.task('browserSync', browserSyncTask)
