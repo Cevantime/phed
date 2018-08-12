@@ -17,7 +17,7 @@ if (!defined('BASEPATH'))
   | path to your installation.
   |
  */
-$config['base_url'] = ENVIRONMENT === 'development' ? 'http://localhost/phed': 'upload.eventorizon.studio';
+$config['base_url'] = ENVIRONMENT === 'development' ? 'http://localhost/phed': 'http://upload.eventorizon.studio';
 
 /*
   |--------------------------------------------------------------------------
