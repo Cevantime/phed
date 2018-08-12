@@ -28,7 +28,6 @@ class Index extends FILEBROWSER_Controller
         $this->load->helper('memberspace/connection');
         $folder = $this->input->get_post('folder');
         $this->layout->view('filebrowser/index', array('folder' => $folder));
-        
     }
 
     public function index()
@@ -38,17 +37,19 @@ class Index extends FILEBROWSER_Controller
 
     public function see($idFile = null)
     {
-        if (!$idFile || user_can('see', 'file', $idFile)) {
-            $file = null;
-            if ($idFile) {
-                if ($idFile !== null && !is_int($idFile) && !ctype_digit($idFile)) {
-                    $userId = user_id();
-                    $file = $this->{$this->modelName}->getRow(['fullpath' => $idFile, 'user_id' => $userId]);
+        if ($idFile) {
 
-                } else {
-                    $file = $this->{$this->modelName}->getId($idFile);
-                }
+            if ($idFile !== null && !is_int($idFile) && !ctype_digit($idFile)) {
+                $userId = user_id();
+                $file = $this->{$this->modelName}->getRow(['fullpath' => $idFile, 'user_id' => $userId]);
+            } else {
+                $file = $this->{$this->modelName}->getId($idFile);
             }
+            $idFile = $file->id;
+        } else {
+            $file = null;
+        }
+        if (!$idFile || user_can('see', 'file', $idFile)) {
 
             if (!$file || $file->is_folder) {
                 $this->seeFolder($file);
@@ -98,12 +99,12 @@ class Index extends FILEBROWSER_Controller
     private function seeFolder($folder = null)
     {
         $children = $this->{$this->modelName}->getGrouped(array('user_id' => user_id(), 'parent_id' => $folder ? $folder->id : null), $this->filters);
-        $this->load->view('filebrowser/see-folder', array('files' => $children, 'folder' => $folder ));
+        $this->load->view('filebrowser/see-folder', array('files' => $children, 'folder' => $folder));
     }
 
     public function seeFolderContent($folderId = null)
     {
-        if( ! $folderId) {
+        if (!$folderId) {
             $folderId = null;
         }
         if ($folderId && !user_can('see', 'file', $folderId)) {
