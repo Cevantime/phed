@@ -27,7 +27,7 @@ class Pheduser extends User
         
         $this->load->model('memberspace/right');
         $this->right->allowUserTo($insert_id, 'add', 'file');
-        $this->right->allowUserTo($insert_id, '*', 'model[file]::isOwnedBy({object},{user})');
+        $this->right->allowUserTo($insert_id, '*','file', 'model[file]::isOwnedBy({object},{user})');
     }
 
     public function get($where = null, $type = 'object', $columns = null)
