@@ -494,6 +494,7 @@ function onSelect($elm) {
 $(function () {
   window.addEventListener('message', function(e){
     window.conf = e.data;
+    console.log('received message');
   });
   parseNewFiles();
   initForms();

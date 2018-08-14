@@ -45,7 +45,8 @@ class Index extends FILEBROWSER_Controller
             } else {
                 $file = $this->{$this->modelName}->getId($idFile);
             }
-            $idFile = $file->id;
+            if($file)
+                $idFile = $file->id;
         } else {
             $file = null;
         }
