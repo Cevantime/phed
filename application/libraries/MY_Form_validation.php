@@ -326,7 +326,11 @@ class MY_Form_validation extends CI_Form_validation
                     $message = $this->_build_error_msg($line, $this->_translate_fieldname($row['label']), $param);
 
                     // Save the error message
-                    $this->_field_data[$row['field']]['errors'][] = $message;
+                    if(is_array($this->_field_data[$row['field']]['errors'])) {
+                        $this->_field_data[$row['field']]['errors'][] = $message;
+                    } else {
+                        $this->_field_data[$row['field']]['errors'] .= $message;
+                    }
 
                     $this->_error_array[$row['field']][] = $message;
 
