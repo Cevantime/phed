@@ -122,21 +122,19 @@ class Index extends FILEBROWSER_Controller
 
     public function add($redirect = null)
     {
-        $pop = $this->save($redirect);
+        $pop = $this->save(null,$redirect);
         $this->load->view('filebrowser/save', array('datas' => $pop));
     }
 
     public function update($idFile, $redirect = null)
     {
-        $this->save($idFile, $redirect);
+        $pop = $this->save($idFile, $redirect);
         $this->load->view('filebrowser/save', array('datas' => $pop));
     }
 
     public function save($id = null, $redirect = null)
     {
-
         $post = $this->input->post();
-
         if (!$id && !$post)
             return array();
 

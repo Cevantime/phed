@@ -43,12 +43,12 @@ if (!function_exists('imageresize')) {
 	function imageresize($src, $width, $height=null, $crop = true) {
 		$path_request = $src;
 		$remote = true;
-		
+
+		$mime = mime_content_type($path_request);
 		//verification qu'on charge bien une image
-		$ext_allowed = array('jpg','jpeg','gif','png');
-		
-		$explode = explode('.',$path_request);
-		if(!in_array(strtolower(end($explode)), $ext_allowed)) return $src;
+		$mime_allowed = array('image/jpg','image/jpeg','image/gif','image/png');
+
+		if(!in_array($mime, $mime_allowed)) return $src;
 
 		$source = $path_request;
 		$CI =& get_instance();

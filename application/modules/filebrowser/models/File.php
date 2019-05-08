@@ -68,7 +68,7 @@ class File extends DATA_Model
             $rules['file'] = array(
                 'field' => 'file',
                 'label' => translate('Fichier'),
-                'rules' => 'file_required|file_allowed_type[image,image_icon,application,document,compress]'
+                'rules' => 'file_required|file_allowed_type[image,image_icon,application,document,compress,mp4]'
             );
         }
         return $rules;

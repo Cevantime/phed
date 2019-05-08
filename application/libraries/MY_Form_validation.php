@@ -570,7 +570,6 @@ class MY_Form_validation extends CI_Form_validation
 
         $exts_types = array_flip($exts);
         $intersection = array_intersect_key($this->CI->output->mimes, $exts_types);
-
         //if we can use the finfo function to check the mime AND the mime
         //exists in the mime file of codeigniter...
         if (function_exists('finfo_open') and !empty($intersection))
@@ -591,7 +590,6 @@ class MY_Form_validation extends CI_Form_validation
 
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
             $file_type = finfo_file($finfo, $file['tmp_name']);
-
         }
         else
         {

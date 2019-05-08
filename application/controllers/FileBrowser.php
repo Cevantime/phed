@@ -93,6 +93,8 @@ class FileBrowser extends Index
             foreach ($errors as $error) {
                 add_error($error);
             }
+            var_dump($errors);
+            die();
             return $post;
         }
 
@@ -100,7 +102,7 @@ class FileBrowser extends Index
         $datas = $modelInst->getLastSavedDatas();
 
         if ($redirect) {
-            $lastRow = $datas->getLastSavedDatas();
+            $lastRow = $datas;
             $regex = '/\{row:(.+?)\}/';
             if (preg_match_all($regex, $redirect, $matches)) {
                 for ($j = 0; $j < count($matches[0]); $j++) {
@@ -117,14 +119,15 @@ class FileBrowser extends Index
 
         $rep = array(
             'status' => 'success',
-            'datas' => $datas
+            'data' => $datas
         );
         if ($this->input->is_ajax_request()) {
             $rep['files'] = $files;
             $rep['html'] = $html;
+            $rep['infos']['infos'] = json_decode($rep['data']['infos']);
         } else if (!$datas['is_folder']) {
-            unset($rep['datas']['infos']);
-            $rep['datas']['url'] = base_url($datas['file']);
+            unset($rep['data']['infos']);
+            $rep['data']['url'] = base_url($datas['file']);
         }
         die(json_encode($rep));
     }
